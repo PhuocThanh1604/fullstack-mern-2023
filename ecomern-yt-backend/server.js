@@ -2,10 +2,10 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import seedRouter from '../routes/seedRoutes.js';
-import productRouter from '../routes/productRoutes.js';
-import userRouter from '../routes/userRoutes.js';
-import orderRouter from '../routes/orderRoutes.js';
+import seedRouter from './routes/seedRoutes.js';
+import productRouter from './routes/productRoutes.js';
+import userRouter from './routes/userRoutes.js';
+import orderRouter from './routes/orderRoutes.js';
 
 dotenv.config();
 
@@ -34,6 +34,7 @@ app.use(express.static(path.join(_dirname, '/ecomern-yt-frontend/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(_dirname, '/ecomern-yt-frontend/build/index.html'));
 });
+
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
