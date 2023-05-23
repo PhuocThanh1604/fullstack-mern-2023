@@ -22,9 +22,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "webpack-dev-server --watch-content-base --open",
+    "build": "webpack --node=production --output ./main.js",
+    "test": "echo \"Error:no test specified\" && exit 1",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
