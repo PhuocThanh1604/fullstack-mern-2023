@@ -4,8 +4,9 @@
   "description": "![Store](/ecomern-yt-frontend/public/images/amazona.jpg)",
   "main": "index.js",
   "scripts": {
-    "build": "cd ecomern-yt-backend && npm install  && cd ../ecomern-yt-frontend && npm install && npm run build",
-    "start": "node ecomern-yt-backend/server.js",
+    "start": "nodemon --watch ecomern-yt-backend --exec babel-node ecomern-yt-backend/server.js",
+    "build": "rm -rf dist && babel ecomern-yt-backend -d && cd ecomern-yt-frontend && npm install && npm run build",
+    "serve": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
