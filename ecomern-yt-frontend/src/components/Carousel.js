@@ -5,9 +5,9 @@ function DarkVariantExample() {
     <Carousel variant="dark">
       <Carousel.Item>
         <img
-          width={900}
-          height={500}
-          className="d-block  w-100"
+          width={400}
+          height={400}
+          className="d-block w-100"
           src="https://i.graphicmama.com/blog/wp-content/uploads/2019/06/28130634/How-to-Design-Your-Own-T-shirt.jpg"
           alt="First slide"
         />
@@ -18,8 +18,8 @@ function DarkVariantExample() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          width={900}
-          height={500}
+          width={400}
+          height={400}
           className="d-block  w-100"
           src="https://www.gentlemansgazette.com/wp-content/uploads/2018/06/Screen-Shot-2018-06-22-at-10.58.05-AM.png"
           alt="Second slide"
@@ -31,8 +31,8 @@ function DarkVariantExample() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          width={800}
-          height={500}
+          width={400}
+          height={400}
           className="d-block w-100"
           src="https://blog.bonfire.com/wp-content/uploads/2023/01/Wavy-Wording-B-1504x782.png"
           alt="Third slide"
