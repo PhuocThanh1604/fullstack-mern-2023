@@ -24,9 +24,10 @@ import ProfileSrceen from './screens/ProfileSrceen';
 import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
+import SearchBox from './components/SearchBox';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
+  const { fullBox, cart, userInfo } = state;
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
@@ -52,8 +53,12 @@ function App() {
       <div
         className={
           sidebarIsOpen
-            ? 'd-flex flex-column site-container active-cont'
-            : 'd-flex flex-column site-container'
+            ? fullBox
+              ? 'site-container active-cont d-flex flex-column full-box'
+              : 'site-container active-cont d-flex flex-column'
+            : fullBox
+            ? 'site-container d-flex flex-column full-box'
+            : 'site-container d-flex flex-column'
         }>
         <ToastContainer position="bottom-center" limit={1} />
         <header>
@@ -69,6 +74,7 @@ function App() {
               </LinkContainer>
               <Navbar.Toggle ari_controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
+                <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart{' '}
@@ -113,17 +119,16 @@ function App() {
           <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
               <strong>Categories</strong>
-
-              {categories.map((category) => (
-                <Nav.Item key={category}>
-                  <LinkContainer
-                    to={`/search?category=${category}`}
-                    onClick={() => setSidebarIsOpen(false)}>
-                    <Nav.Link>{category}</Nav.Link>
-                  </LinkContainer>
-                </Nav.Item>
-              ))}
             </Nav.Item>
+            {categories.map((category) => (
+              <Nav.Item key={category}>
+                <LinkContainer
+                  to={{ pathname: '/search', search: `category=${category}` }}
+                  onClick={() => setSidebarIsOpen(false)}>
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
           </Nav>
         </div>
         <main>
