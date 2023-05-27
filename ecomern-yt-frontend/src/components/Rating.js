@@ -1,8 +1,8 @@
 function Rating(props) {
-    const { rating, numReviews, caption } = props;
-    return (
-        <div className="rating">
-              <span>
+  const { rating, numReviews, caption } = props;
+  return (
+    <div className="rating">
+      <span>
         <i
           className={
             rating >= 1
@@ -57,8 +57,12 @@ function Rating(props) {
           }
         />
       </span>
-      <span>{numReviews} reviews</span>
-        </div>
-    )
+      {caption ? (
+        <span>{caption}</span>
+      ) : (
+        <span>{' ' + numReviews + 'reviews'}</span>
+      )}
+    </div>
+  );
 }
 export default Rating;

@@ -25,6 +25,11 @@ import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
+import SearchScreen from './screens/SearchScreen';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import Product from './components/Product';
+import DashbroadScreen from './screens/DashbroadScreen';
+import AdminRoute from './components/AdminRoute';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { fullBox, cart, userInfo } = state;
@@ -105,6 +110,23 @@ function App() {
                       Sign In
                     </Link>
                   )}
+
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                      <LinkContainer to="/admin/dasboard">
+                        <NavDropdown.Item> Dasboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item> Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item> Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item> Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -141,10 +163,41 @@ function App() {
               <Route path="/Signup" element={<SignupScreen />} />
               <Route path="/Shipping" element={<ShippingAddressScreen />} />
               <Route path="/payment" element={<PaymentMethodScreen />} />
-              <Route path="/order/:id" element={<OrderScreen />} />
+              <Route
+                path="/order/:id"
+                element={
+                  <ProtectedRoutes>
+                    <OrderScreen />
+                  </ProtectedRoutes>
+                }
+              />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
-              <Route path="/orderhistory" element={<OrderHistoryScreen />} />
-              <Route path="/profile" element={<ProfileSrceen />} />
+              <Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoutes>
+                    <OrderHistoryScreen />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoutes>
+                    {' '}
+                    <ProfileSrceen />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route path="/search" element={<SearchScreen />} />
+              {/* Admin Routes */}
+              <Route
+                path="/admin/dashbroad"
+                element={
+                  <AdminRoute>
+                    <DashbroadScreen />
+                  </AdminRoute>
+                }></Route>
             </Routes>
           </Container>
         </main>
